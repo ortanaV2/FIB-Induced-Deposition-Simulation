@@ -14,9 +14,9 @@ lenses = {
     "Electrode": {"z": 1.0, "depth": 0.3, "r_in": 0.3, "r_out": 1.0, "V": 0},
     "Accelerator_Lens_1": {"z": 1.7, "depth": 0.3, "r_in": 0.2, "r_out": 1.0, "V": -30000},
     "Accelerator_Lens_2": {"z": 2.2, "depth": 0.3, "r_in": 0.3, "r_out": 1.0, "V": 0},
-    "Accelerator_Lens_3": {"z": 2.7, "depth": 0.3, "r_in": 0.1, "r_out": 1.0, "V": -30000},
-    "Condensor_Lens_1": {"z": 3.4, "depth": 0.3, "r_in": 0.15, "r_out": 1.0, "V": 0},
-    "Condensor_Lens_2": {"z": 3.9, "depth": 0.3, "r_in": 0.5, "r_out": 1.0, "V": -30000},
+    "Accelerator_Lens_3": {"z": 2.7, "depth": 0.3, "r_in": 0.15, "r_out": 1.0, "V": -30000},
+    "Condensor_Lens_1": {"z": 3.2, "depth": 0.3, "r_in": 0.25, "r_out": 1.0, "V": 0},
+    "Stock": {"z": 3.7, "depth": 0.2, "r_in": 0, "r_out": 1, "V": -30000},
     # "Condensor_Lens_2": {
     #     "z": 3.9, "depth": 0.3, "V": -30000,
     #     "r_in_start": 0.1, "r_in_end": 0.05,
@@ -202,5 +202,6 @@ ax.set_title("Ar⁺-Ion Trajectory Simulation")
 ax.set_xlim(0, z_max)
 ax.set_ylim(-r_max / 2, r_max / 2)
 plt.tight_layout()
-plt.savefig("result.png", dpi=300)
+# plt.savefig("result.png", dpi=300)
+plt.show()
 print("Plot saved.")
