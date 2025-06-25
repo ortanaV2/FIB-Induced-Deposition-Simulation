@@ -1,6 +1,8 @@
 import json
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.cm import ScalarMappable
+from matplotlib.colors import Normalize
 from numba import njit, prange
 
 # Define grid size and resolution
@@ -17,8 +19,8 @@ lenses = {
     "Accelerator_Lens_3": {"z": 2.7, "depth": 0.3, "r_in": 0.15, "r_out": 1.0, "V": -30000},
     "Condensor_Lens_1": {"z": 3.2, "depth": 0.3, "r_in": 0.25, "r_out": 1.0, "V": 0},
     "Stock": {"z": 3.7, "depth": 0.2, "r_in": 0, "r_out": 1, "V": -30000},
-    # "Conical_Lens_Example": {
-    #     "z": 3.9, "depth": 0.3, "V": 0,
+    # "Condensor_Lens_2": {
+    #     "z": 3.9, "depth": 0.3, "V": -30000,
     #     "r_in_start": 0.1, "r_in_end": 0.05,
     #     "r_out_start": 1.0, "r_out_end": 1.0
     # },
@@ -195,14 +197,18 @@ for i in range(n_ionen):
             break
         ax.plot(z[j:j + 2], r[j:j + 2], color=colors[j], linewidth=0.1)
 
-plt.colorbar(im, ax=ax, label='|E| (V/cm)')
+norm = Normalize(vmin=E_mag.min(), vmax=E_mag.max())
+sm = ScalarMappable(norm=norm, cmap='jet')
+sm.set_array([])
+
+plt.colorbar(sm, ax=ax, label='|E| (V/cm)')
+
 ax.set_xlabel("z (cm)")
 ax.set_ylabel("r (cm)")
 ax.set_title("Ar⁺-Ion Trajectory Simulation")
 ax.set_xlim(0, z_max)
 ax.set_ylim(-r_max / 2, r_max / 2)
 plt.tight_layout()
-
-plt.savefig("result.png", dpi=300)
-# plt.show()
+# plt.savefig("result.png", dpi=300)
+plt.show()
 print("Plot saved.")
