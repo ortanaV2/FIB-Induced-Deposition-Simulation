@@ -1,16 +1,12 @@
-import os
-import time
+import os, time
 from PIL import Image, UnidentifiedImageError
 import numpy as np
 import matplotlib.pyplot as plt
 
 image_path = "result.png"
-
 if not os.path.exists(image_path):
-    print(f"{image_path} nicht gefunden.")
+    print(f"{image_path} not found.")
     exit()
-
-last_modified = os.path.getmtime(image_path)
 
 def safe_load_image(path, retries=5, delay=0.1):
     for _ in range(retries):
@@ -19,8 +15,9 @@ def safe_load_image(path, retries=5, delay=0.1):
                 return np.array(img.convert("RGB"))
         except (OSError, UnidentifiedImageError):
             time.sleep(delay)
-    raise RuntimeError(f"Konnte {path} nach {retries} Versuchen nicht laden (möglicherweise noch im Schreibvorgang).")
+    raise RuntimeError(f"Failed to load {path} after {retries} attempts.")
 
+last_modified = os.path.getmtime(image_path)
 img_array = safe_load_image(image_path)
 
 fig, ax = plt.subplots()
@@ -29,7 +26,7 @@ ax.axis('off')
 plt.tight_layout()
 plt.show(block=False)
 
-print("Live-Updater gestartet. Änderungen an 'result.png' werden überwacht...")
+print("Live-updater started. Monitoring changes to 'result.png'...")
 
 try:
     while True:
@@ -41,8 +38,8 @@ try:
                 img_array = safe_load_image(image_path)
                 im.set_data(img_array)
                 fig.canvas.draw_idle()
-                print("Bild aktualisiert.")
+                print("Image updated.")
             except RuntimeError as e:
-                print("Fehler beim Laden des Bildes:", e)
+                print("Error loading image:", e)
 except KeyboardInterrupt:
-    print("\nBeendet durch Benutzer.")
+    print("\nTerminated by user.")
