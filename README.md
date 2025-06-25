@@ -7,7 +7,7 @@ This project simulates the motion of Ar⁺ ions through a system of electrostati
 - Ion trajectory simulation with random emission angles
 - Aperture collision handling
 
-![image](https://github.com/user-attachments/assets/9219a416-1838-4aa3-94be-43d0fc0d4397)
+![Focused-Ion-Beam-Figure](https://github.com/user-attachments/assets/835186fc-0633-4d57-88d8-87878a114557)
 
 ## Requirements
 - Python ≥ 3.8
@@ -44,9 +44,6 @@ apertures = {
     "Aperture1": {"z": 0.7, "depth": 0.1, "r_in": 0.05, "r_out": 1.0}
 }
 ```
-
-## Example
-![image](https://github.com/user-attachments/assets/6cd1db7f-3470-42e1-a131-2cf87558eac5)
 
 ## In Depth: Simulation Steps
 ### Laplace Solver
